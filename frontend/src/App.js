@@ -4,9 +4,9 @@ import Flashcard from "./Flashcard";
 function App() {
   const [card, setCard] = useState(null);
   const [sessionTime, setSessionTime] = useState(60); // 1 min by default
-
+  const card_index = 0
   useEffect(() => {
-    // Fetch a card from backend for a chosen topic
+    // Fetch cards
     fetch("http://localhost:8000/cards")
       .then((res) => {
         if (!res.ok) {
@@ -14,7 +14,7 @@ function App() {
         }
         return res.json();
       })
-      .then((data) => setCard(data[0]))
+      .then((data) => setCard(data[card_index]))
       .catch((error) => console.error(error));
   }, []);
 
@@ -22,6 +22,9 @@ function App() {
     // Process the answer (scoring logic, etc.)
     console.log("User answer:", userAnswer);
     // Fetch next card...
+    card_index = card_index + 1
+    setCard(data[card_index])
+
   };
 
   return (

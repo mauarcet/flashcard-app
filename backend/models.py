@@ -12,8 +12,7 @@ class Topic(BaseModel):
 
 class StudySession(BaseModel):
     id: str
-    student_id: str
-    topics: List[str]
+    topics: List[Topic]
     score: int = 0
     duration: int  # in seconds
 
@@ -23,4 +22,5 @@ class Card(BaseModel):
     definition: str
     answer: str
     main_words: List[str]
+    topic: Topic
 
